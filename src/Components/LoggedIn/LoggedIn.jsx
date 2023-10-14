@@ -4,9 +4,9 @@ import "./LoggedIn.css";
 const LoggedIn = ({ setIsLoggedIn }) => {
   return (
     <>
-      <h1 className="title">You are now logged in!</h1>
+      <h1 className="title">Agora você está logado!</h1>
       <button className="back_button" onClick={() => setIsLoggedIn(false)}>
-        Go Back
+        Volte
       </button>
     </>
   );

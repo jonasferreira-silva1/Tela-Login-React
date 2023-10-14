@@ -12,47 +12,47 @@ const LoginForm = ({ setIsLoggedIn }) => {
   const [errorMessages, setErrorMessages] = useState({});
 
   const errors = {
-    username: "Invalid username",
-    password: "Invalid password",
-    noUsername: "Please enter your username",
-    noPassword: "Please enter your password",
+    username: "Nome de usuário Inválido",
+    password: "Senha Inválida",
+    noUsername: "Por favor, insira seu nome de usuário",
+    noPassword: "Por favor, insira sua senha",
   };
 
   const handleSubmit = (e) => {
-    // Prevent page from reloading
+    // Evita a recarga da página
     e.preventDefault();
 
     if (!username) {
-      // Username input is empty
+      // O campo de nome de usuário está vazio
       setErrorMessages({ name: "noUsername", message: errors.noUsername });
       return;
     }
 
     if (!password) {
-      // Password input is empty
+      // O campo de senha está vazio
       setErrorMessages({ name: "noPassword", message: errors.noPassword });
       return;
     }
 
-    // Search for user credentials
+    // Procura pelas credenciais do usuário
     const currentUser = database.find((user) => user.username === username);
 
     if (currentUser) {
       if (currentUser.password !== password) {
-        // Wrong password
+        // Senha incorreta
         setErrorMessages({ name: "password", message: errors.password });
       } else {
-        // Correct password, log in user
+        // Senha correta, faz o login do usuário
         setErrorMessages({});
         setIsLoggedIn(true);
       }
     } else {
-      // Username doens't exist in the database
+      // Nome de usuário não existe no banco de dados
       setErrorMessages({ name: "username", message: errors.username });
     }
   };
 
-  // Render error messages
+  // Renderiza mensagens de erro
   const renderErrorMsg = (name) =>
     name === errorMessages.name && (
       <p className="error_msg">{errorMessages.message}</p>
@@ -60,15 +60,15 @@ const LoginForm = ({ setIsLoggedIn }) => {
 
   return (
     <Card>
-      <h1 className="title">Sign In</h1>
+      <h1 className="title">Entrar</h1>
       <p className="subtitle">
-        Please log in using your username and password!
+        Por favor, faça o login usando seu nome de usuário e senha!
       </p>
       <form onSubmit={handleSubmit}>
         <div className="inputs_container">
           <input
             type="text"
-            placeholder="Username"
+            placeholder="Nome de usuário"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
@@ -76,18 +76,18 @@ const LoginForm = ({ setIsLoggedIn }) => {
           {renderErrorMsg("noUsername")}
           <input
             type="password"
-            placeholder="Password"
+            placeholder="Senha"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           {renderErrorMsg("password")}
           {renderErrorMsg("noPassword")}
         </div>
-        <input type="submit" value="Log In" className="login_button" />
+        <input type="submit" value="Entrar" className="login_button" />
       </form>
       <div className="link_container">
         <a href="" className="small">
-          Forgot Password?
+          Esqueceu a senha?
         </a>
       </div>
       <div className="icons">
